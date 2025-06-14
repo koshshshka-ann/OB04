@@ -43,3 +43,13 @@ class Weapon(ABC):
         """Абстрактный метод атаки. Должен быть реализован в подклассах."""
         pass
 
+class Sword(Weapon):
+    """Меч — ближний бой."""
+    def attack(self):
+        return "Боец наносит удар мечом."
+
+class Bow(Weapon):
+    """Лук — дальний бой."""
+    def attack(self):
+        return "Боец стреляет из лука."
+
