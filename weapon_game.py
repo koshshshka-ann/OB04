@@ -65,3 +65,25 @@ class Fighter:
     def fight(self):
         """Бой — использует текущее оружие."""
         print(self.weapon.attack())
+
+class Monster:
+    """Простой монстр (для демонстрации)."""
+    def __init__(self, name):
+        self.name = name
+
+def battle(fighter: Fighter, monster: Monster):
+    """Механизм боя (не зависит от типа оружия)."""
+    print(f"\nБоец выбирает {fighter.weapon.__class__.__name__.lower()}.")
+    print(fighter.fight())
+    print(f"{monster.name} побежден!")
+
+# Создаем персонажей
+fighter = Fighter(Sword())  # Боец с мечом
+monster = Monster("Злобный гоблин")
+
+# Демонстрация боя
+battle(fighter, monster)
+
+# Меняем оружие и снова боремся
+fighter.change_weapon(Bow())
+battle(fighter, monster)
