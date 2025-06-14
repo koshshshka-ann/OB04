@@ -53,3 +53,15 @@ class Bow(Weapon):
     def attack(self):
         return "Боец стреляет из лука."
 
+class Fighter:
+    """Боец, который может менять оружие."""
+    def __init__(self, weapon: Weapon):
+        self.weapon = weapon
+
+    def change_weapon(self, weapon: Weapon):
+        """Смена оружия (принцип инъекции зависимостей)."""
+        self.weapon = weapon
+
+    def fight(self):
+        """Бой — использует текущее оружие."""
+        print(self.weapon.attack())
