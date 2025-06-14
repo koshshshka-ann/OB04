@@ -36,25 +36,44 @@
 
 from abc import ABC, abstractmethod
 
+
 class Weapon(ABC):
     """Абстрактный класс оружия. Новые типы оружия наследуются от него."""
+
     @abstractmethod
-    def attack(self):
+    def attack(self) -> str:  # Указываем, что метод возвращает строку
         """Абстрактный метод атаки. Должен быть реализован в подклассах."""
         pass
 
+    @abstractmethod
+    def get_name(self) -> str:  # Добавляем метод для получения названия
+        """Возвращает название оружия на русском"""
+        pass
+
+
 class Sword(Weapon):
     """Меч — ближний бой."""
-    def attack(self):
-        return "Боец наносит удар мечом."
+
+    def attack(self) -> str:
+        return "Боец наносит удар мечом."  # Возвращаем строку вместо печати
+
+    def get_name(self) -> str:
+        return "меч"  # Русское название
+
 
 class Bow(Weapon):
     """Лук — дальний бой."""
-    def attack(self):
-        return "Боец стреляет из лука."
+
+    def attack(self) -> str:
+        return "Боец стреляет из лука."  # Возвращаем строку вместо печати
+
+    def get_name(self) -> str:
+        return "лук"  # Русское название
+
 
 class Fighter:
     """Боец, который может менять оружие."""
+
     def __init__(self, weapon: Weapon):
         self.weapon = weapon
 
@@ -64,18 +83,22 @@ class Fighter:
 
     def fight(self):
         """Бой — использует текущее оружие."""
-        print(self.weapon.attack())
+        return self.weapon.attack()  # Возвращаем результат attack()
+
 
 class Monster:
     """Простой монстр (для демонстрации)."""
+
     def __init__(self, name):
         self.name = name
 
+
 def battle(fighter: Fighter, monster: Monster):
     """Механизм боя (не зависит от типа оружия)."""
-    print(f"\nБоец выбирает {fighter.weapon.__class__.__name__.lower()}.")
-    print(fighter.fight())
+    print(f"\nБоец выбирает {fighter.weapon.get_name()}.")  # Используем русское название
+    print(fighter.fight())  # Печатаем результат fight()
     print(f"{monster.name} побежден!")
+
 
 # Создаем персонажей
 fighter = Fighter(Sword())  # Боец с мечом
